@@ -1,4 +1,4 @@
-package com.mabn.calendarlib.component
+package com.mabn.calendar.component
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -6,8 +6,8 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.itemsIndexed
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.mabn.calendarlib.DayView
-import com.mabn.calendarlib.utils.dayViewModifier
+import com.mabn.calendar.DayView
+import com.mabn.calendar.utils.dayViewModifier
 import java.time.LocalDate
 import java.time.YearMonth
 

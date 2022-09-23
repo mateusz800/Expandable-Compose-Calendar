@@ -1,4 +1,4 @@
-package com.mabn.calendarlib.core
+package com.mabn.calendar.core
 
 import java.time.LocalDate
 

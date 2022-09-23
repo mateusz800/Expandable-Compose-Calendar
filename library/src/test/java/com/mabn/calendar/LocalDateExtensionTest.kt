@@ -1,13 +1,33 @@
-package com.mabn.calendarlib
+package com.mabn.calendar
 
-import com.mabn.calendarlib.utils.getWeekStartDate
+import com.mabn.calendar.utils.getRemainingDatesInMonth
+import com.mabn.calendar.utils.getRemainingDatesInWeek
+import com.mabn.calendar.utils.getWeekStartDate
 import org.junit.Assert
 import org.junit.Test
 import java.time.DayOfWeek
 import java.time.LocalDate
 
 
-internal class UtilsTest {
+internal class LocalDateExtensionTest{
+    @Test
+    fun `get remaining dates in month`(){
+        val date = LocalDate.of(2022, 8, 29)
+        val remainingDays = date.getRemainingDatesInMonth()
+        Assert.assertEquals(3,remainingDays.size)
+        Assert.assertEquals(LocalDate.of(2022, 8, 29), remainingDays[0])
+        Assert.assertEquals( LocalDate.of(2022, 8,31),remainingDays[2])
+    }
+
+    @Test
+    fun `get remaining dates in week`(){
+        val date = LocalDate.of(2022,9,30)
+        val remainingDays = date.getRemainingDatesInWeek()
+        Assert.assertEquals(2, remainingDays.size)
+        Assert.assertEquals(LocalDate.of(2022, 10, 1), remainingDays[0])
+        Assert.assertEquals( LocalDate.of(2022, 10,2),remainingDays[1])
+    }
+
     @Test
     fun `get date for the first day of the week (default monday)`() {
         val date = LocalDate.of(2022, 9, 21)

@@ -1,4 +1,4 @@
-package com.mabn.calendarlib
+package com.mabn.calendar
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.*
@@ -7,11 +7,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import java.time.YearMonth
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.mabn.calendarlib.component.InlineCalendar
-import com.mabn.calendarlib.component.MonthViewCalendar
-import com.mabn.calendarlib.core.CalendarIntent
-import com.mabn.calendarlib.core.Period
-import com.mabn.calendarlib.utils.getWeekStartDate
+import com.mabn.calendar.component.InlineCalendar
+import com.mabn.calendar.component.MonthViewCalendar
+import com.mabn.calendar.core.CalendarIntent
+import com.mabn.calendar.core.Period
+import com.mabn.calendar.utils.getWeekStartDate
 import java.time.LocalDate
 
 @Composable

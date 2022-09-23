@@ -1,14 +1,14 @@
-package com.mabn.calendarlib
+package com.mabn.calendar
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.mabn.calendarlib.core.CalendarIntent
-import com.mabn.calendarlib.core.Period
-import com.mabn.calendarlib.utils.*
-import com.mabn.calendarlib.utils.getMonthStartDate
-import com.mabn.calendarlib.utils.getNextDates
-import com.mabn.calendarlib.utils.getRemainingDatesInWeek
-import com.mabn.calendarlib.utils.getWeekStartDate
+import com.mabn.calendar.core.CalendarIntent
+import com.mabn.calendar.core.Period
+import com.mabn.calendar.utils.*
+import com.mabn.calendar.utils.getMonthStartDate
+import com.mabn.calendar.utils.getNextDates
+import com.mabn.calendar.utils.getRemainingDatesInWeek
+import com.mabn.calendar.utils.getWeekStartDate
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch

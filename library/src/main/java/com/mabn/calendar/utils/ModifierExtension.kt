@@ -1,4 +1,4 @@
-package com.mabn.calendarlib.utils
+package com.mabn.calendar.utils
 
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween

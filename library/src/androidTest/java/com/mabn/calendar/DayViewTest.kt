@@ -1,4 +1,4 @@
-package com.mabn.calendarlib
+package com.mabn.calendar
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Row
@@ -8,7 +8,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.test.*
 import androidx.compose.ui.test.junit4.createComposeRule
-import com.mabn.calendarlib.utils.getBackgroundColor
+import com.mabn.calendar.utils.getBackgroundColor
 import org.junit.*
 import org.junit.runners.MethodSorters
 import java.time.LocalDate
