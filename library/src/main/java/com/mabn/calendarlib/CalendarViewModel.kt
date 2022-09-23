@@ -23,6 +23,9 @@ class CalendarViewModel : ViewModel() {
         )
     val visibleDates: StateFlow<Array<List<LocalDate>>> = _visibleDates
 
+    private val _selectedDate = MutableStateFlow(LocalDate.now())
+    val selectedDate: StateFlow<LocalDate> = _selectedDate
+
     private val _calendarExpanded = MutableStateFlow(false)
     val calendarExpanded: StateFlow<Boolean> = _calendarExpanded
 
@@ -45,6 +48,11 @@ class CalendarViewModel : ViewModel() {
             }
             is CalendarIntent.LoadNextDates -> {
                 calculateCalendarDates(intent.startDate, intent.period)
+            }
+            is CalendarIntent.SelectDate -> {
+                viewModelScope.launch {
+                    _selectedDate.emit(intent.date)
+                }
             }
         }
     }

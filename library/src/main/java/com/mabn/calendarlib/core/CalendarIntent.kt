@@ -9,6 +9,8 @@ sealed class CalendarIntent {
         val period: Period = Period.WEEK
     ) : CalendarIntent()
 
+    class SelectDate(val date: LocalDate) : CalendarIntent()
+
     object ExpandCalendar : CalendarIntent()
     object CollapseCalendar : CalendarIntent()
 }
