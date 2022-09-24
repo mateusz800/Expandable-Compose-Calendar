@@ -1,4 +1,4 @@
-package com.mabn.calendarlib.component
+package com.mabn.calendar.component
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect

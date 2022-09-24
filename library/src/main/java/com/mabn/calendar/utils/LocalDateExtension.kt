@@ -1,4 +1,4 @@
-package com.mabn.calendarlib.utils
+package com.mabn.calendar.utils
 
 import java.time.DayOfWeek
 import java.time.LocalDate

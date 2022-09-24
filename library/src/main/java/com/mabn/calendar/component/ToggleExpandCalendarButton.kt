@@ -1,4 +1,4 @@
-package com.mabn.calendarlib
+package com.mabn.calendar
 
 import androidx.compose.material.Icon
 import androidx.compose.material.IconToggleButton
