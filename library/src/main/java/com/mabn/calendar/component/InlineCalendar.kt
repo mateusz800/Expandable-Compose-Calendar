@@ -8,15 +8,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
-import com.mabn.calendar.DayView
 import com.mabn.calendar.utils.dayViewModifier
 import java.time.LocalDate
 
 @Composable
 internal fun InlineCalendar(
     loadedDates: Array<List<LocalDate>>,
+    selectedDate: LocalDate,
     loadNextWeek: (nextWeekDate: LocalDate) -> Unit,
-    loadPrevWeek: (endWeekDate: LocalDate) -> Unit
+    loadPrevWeek: (endWeekDate: LocalDate) -> Unit,
+    onDayClick: (LocalDate) -> Unit
 ) {
     val itemWidth = LocalConfiguration.current.screenWidthDp / 7
     CalendarPager(
@@ -33,6 +34,8 @@ internal fun InlineCalendar(
                     ) {
                         DayView(
                             date,
+                            isSelected = selectedDate == date,
+                            onDayClick = onDayClick,
                             modifier = Modifier.dayViewModifier(date)
                         )
                     }

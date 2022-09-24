@@ -7,31 +7,35 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import java.time.YearMonth
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.mabn.calendar.component.InlineCalendar
-import com.mabn.calendar.component.MonthViewCalendar
 import com.mabn.calendar.core.CalendarIntent
 import com.mabn.calendar.core.Period
 import com.mabn.calendar.utils.getWeekStartDate
+import com.mabn.calendar.component.InlineCalendar
+import com.mabn.calendar.component.MonthViewCalendar
 import java.time.LocalDate
 
 @Composable
-fun CalendarView() {
+fun CalendarView(onDayClick: (LocalDate) -> Unit) {
     val viewModel: CalendarViewModel = viewModel()
     val loadedDates = viewModel.visibleDates.collectAsState()
+    val selectedDate = viewModel.selectedDate.collectAsState()
     val calendarExpanded = viewModel.calendarExpanded.collectAsState()
     CalendarView(
         loadedDates = loadedDates.value,
+        selectedDate = selectedDate.value,
         onIntent = viewModel::onIntent,
-        calendarExpanded = calendarExpanded.value
+        calendarExpanded = calendarExpanded.value,
+        onDayClick = onDayClick
     )
 }
-
 
 @Composable
 private fun CalendarView(
     loadedDates: Array<List<LocalDate>>,
+    selectedDate: LocalDate,
     onIntent: (CalendarIntent) -> Unit,
-    calendarExpanded: Boolean
+    calendarExpanded: Boolean,
+    onDayClick: (LocalDate) -> Unit
 ) {
     val currentMonth = if (!calendarExpanded) YearMonth.of(
         loadedDates[1][0].year,
@@ -56,7 +60,9 @@ private fun CalendarView(
                 collapse = { onIntent(CalendarIntent.CollapseCalendar) })
         }
         if (calendarExpanded) {
-            MonthViewCalendar(loadedDates,
+            MonthViewCalendar(
+                loadedDates,
+                selectedDate,
                 currentMonth = currentMonth,
                 loadDatesForMonth = { yearMonth ->
                     onIntent(
@@ -66,11 +72,16 @@ private fun CalendarView(
                             ), period = Period.MONTH
                         )
                     )
+                },
+                onDayClick = {
+                    onIntent(CalendarIntent.SelectDate(it))
+                    onDayClick(it)
                 }
             )
         } else {
             InlineCalendar(
                 loadedDates,
+                selectedDate,
                 loadNextWeek = { nextWeekDate -> onIntent(CalendarIntent.LoadNextDates(nextWeekDate)) },
                 loadPrevWeek = { endWeekDate ->
                     onIntent(
@@ -78,7 +89,12 @@ private fun CalendarView(
                             endWeekDate.minusDays(1).getWeekStartDate()
                         )
                     )
-                })
+                },
+                onDayClick = {
+                    onIntent(CalendarIntent.SelectDate(it))
+                    onDayClick(it)
+                }
+            )
         }
     }
 }

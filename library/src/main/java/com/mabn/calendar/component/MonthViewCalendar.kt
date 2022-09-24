@@ -6,7 +6,6 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.itemsIndexed
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.mabn.calendar.DayView
 import com.mabn.calendar.utils.dayViewModifier
 import java.time.LocalDate
 import java.time.YearMonth
@@ -14,8 +13,10 @@ import java.time.YearMonth
 @Composable
 internal fun MonthViewCalendar(
     loadedDates: Array<List<LocalDate>>,
+    selectedDate: LocalDate,
     currentMonth: YearMonth,
-    loadDatesForMonth: (YearMonth) -> Unit
+    loadDatesForMonth: (YearMonth) -> Unit,
+    onDayClick: (LocalDate) -> Unit
 ) {
     CalendarPager(
         loadedDates = loadedDates,
@@ -26,6 +27,8 @@ internal fun MonthViewCalendar(
             itemsIndexed(loadedDates[currentPage]) { index, date ->
                 DayView(
                     date,
+                    isSelected = selectedDate == date,
+                    onDayClick = { onDayClick(date) },
                     weekDayLabel = index < 7,
                     modifier = Modifier.dayViewModifier(date, currentMonth, monthView = true)
                 )

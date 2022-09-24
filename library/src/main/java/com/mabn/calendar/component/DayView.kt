@@ -1,6 +1,7 @@
-package com.mabn.calendar
+package com.mabn.calendar.component
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
@@ -25,13 +26,22 @@ import java.time.format.TextStyle
  * @param modifier view modifier
  */
 @Composable
-fun DayView(date: LocalDate, modifier: Modifier = Modifier, weekDayLabel: Boolean = true) {
+fun DayView(
+    date: LocalDate,
+    onDayClick: (LocalDate) -> Unit,
+    modifier: Modifier = Modifier,
+    isSelected: Boolean = false,
+    weekDayLabel: Boolean = true
+) {
     val isCurrentDay = date == LocalDate.now()
     val dayValueModifier =
-        if (isCurrentDay) modifier.background(MaterialTheme.colors.primary) else modifier
+        if (isCurrentDay) modifier.background(MaterialTheme.colors.primary)
+        else if (isSelected) modifier.background(MaterialTheme.colors.primaryVariant)
+        else modifier
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier.testTag("day_view_column")
+        modifier = Modifier
+            .testTag("day_view_column")
     ) {
         if (weekDayLabel) {
             Text(
@@ -39,11 +49,13 @@ fun DayView(date: LocalDate, modifier: Modifier = Modifier, weekDayLabel: Boolea
                     TextStyle.SHORT,
                     LocalContext.current.resources.configuration.locales[0]
                 ),
-                //DayEnum.values()[date.dayOfWeek.value - 1].shortName,
                 fontSize = 10.sp
             )
         }
-        Box(dayValueModifier.padding(10.dp)) {
+        Box(
+            dayValueModifier
+                .padding(10.dp)
+                .clickable { onDayClick(date) }) {
             Text(
                 date.dayOfMonth.toString(),
                 fontWeight = FontWeight.Bold,
