@@ -1,4 +1,4 @@
-package com.mabn.calendar
+package com.mabn.calendarlibrary
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.*
@@ -7,20 +7,20 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import java.time.YearMonth
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.mabn.calendar.core.CalendarIntent
-import com.mabn.calendar.core.Period
-import com.mabn.calendar.utils.getWeekStartDate
-import com.mabn.calendar.component.InlineCalendar
-import com.mabn.calendar.component.MonthViewCalendar
+import com.mabn.calendarlibrary.core.CalendarIntent
+import com.mabn.calendarlibrary.core.Period
+import com.mabn.calendarlibrary.utils.getWeekStartDate
+import com.mabn.calendarlibrary.component.InlineCalendar
+import com.mabn.calendarlibrary.component.MonthViewCalendar
 import java.time.LocalDate
 
 @Composable
-fun CalendarView(onDayClick: (LocalDate) -> Unit) {
+fun ExpandableCalendar(onDayClick: (LocalDate) -> Unit) {
     val viewModel: CalendarViewModel = viewModel()
     val loadedDates = viewModel.visibleDates.collectAsState()
     val selectedDate = viewModel.selectedDate.collectAsState()
     val calendarExpanded = viewModel.calendarExpanded.collectAsState()
-    CalendarView(
+    ExpandableCalendar(
         loadedDates = loadedDates.value,
         selectedDate = selectedDate.value,
         onIntent = viewModel::onIntent,
@@ -30,7 +30,7 @@ fun CalendarView(onDayClick: (LocalDate) -> Unit) {
 }
 
 @Composable
-private fun CalendarView(
+private fun ExpandableCalendar(
     loadedDates: Array<List<LocalDate>>,
     selectedDate: LocalDate,
     onIntent: (CalendarIntent) -> Unit,

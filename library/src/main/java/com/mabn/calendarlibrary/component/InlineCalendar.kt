@@ -1,4 +1,4 @@
-package com.mabn.calendar.component
+package com.mabn.calendarlibrary.component
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
@@ -8,7 +8,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
-import com.mabn.calendar.utils.dayViewModifier
+import com.mabn.calendarlibrary.utils.dayViewModifier
 import java.time.LocalDate
 
 @Composable

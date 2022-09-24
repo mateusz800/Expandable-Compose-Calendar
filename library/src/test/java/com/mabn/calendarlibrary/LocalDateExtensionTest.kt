@@ -1,8 +1,8 @@
-package com.mabn.calendar
+package com.mabn.calendarlibrary
 
-import com.mabn.calendar.utils.getRemainingDatesInMonth
-import com.mabn.calendar.utils.getRemainingDatesInWeek
-import com.mabn.calendar.utils.getWeekStartDate
+import com.mabn.calendarlibrary.utils.getRemainingDatesInMonth
+import com.mabn.calendarlibrary.utils.getRemainingDatesInWeek
+import com.mabn.calendarlibrary.utils.getWeekStartDate
 import org.junit.Assert
 import org.junit.Test
 import java.time.DayOfWeek

@@ -1,4 +1,4 @@
-package com.mabn.calendar.utils
+package com.mabn.calendarlibrary.utils
 
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.test.SemanticsNodeInteraction

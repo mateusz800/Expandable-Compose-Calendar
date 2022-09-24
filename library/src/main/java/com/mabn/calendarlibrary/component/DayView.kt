@@ -1,4 +1,4 @@
-package com.mabn.calendar.component
+package com.mabn.calendarlibrary.component
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable

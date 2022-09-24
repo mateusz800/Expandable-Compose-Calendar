@@ -17,6 +17,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.mabn.calendarlibrary.ExpandableCalendar
 import com.mabn.calendar.ui.theme.CalendarTheme
 import java.time.LocalDate
 
@@ -41,7 +42,7 @@ class MainActivity : ComponentActivity() {
 fun Calendar() {
     val currentDate = remember { mutableStateOf(LocalDate.now())}
     Column(Modifier.padding(vertical=20.dp)) {
-        CalendarView(onDayClick = {
+        ExpandableCalendar(onDayClick = {
             currentDate.value = it
         })
         Box(contentAlignment = Alignment.Center, modifier = Modifier.fillMaxSize()){

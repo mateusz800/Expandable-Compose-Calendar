@@ -1,4 +1,4 @@
-package com.mabn.calendar
+package com.mabn.calendarlibrary
 
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
