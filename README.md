@@ -15,16 +15,23 @@ A calendar with a week view that can be expanded to a month view
 2. Add the dependency
 ```gradle
 dependencies {
-  .....
+  ...
   implementation 'com.github.mateusz800:Expandable-Compose-Calendar:ce5075e1d4'
-  .....
+  ...
 }
 ```
 
 ### Usage
-Add the `CalendarView` composable to your code:
+Add the `ExpandableCalendar` composable to your code:
 ```kotlin
-CalendarView(onDayClick = {
-    ....
+ExpandableCalendar(onDayClick = {
+    ...
 })
 ```
+
+### Support project
+#### Contributing
+Contributions are always welcome!
+
+#### Show your support
+Give a ⭐️ if this project helped you!
