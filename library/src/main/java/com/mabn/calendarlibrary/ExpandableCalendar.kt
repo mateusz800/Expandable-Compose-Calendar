@@ -1,5 +1,6 @@
 package com.mabn.calendarlibrary
 
+import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -45,7 +46,7 @@ private fun ExpandableCalendar(
         loadedDates[1][loadedDates[1].size / 2].month
     )
 
-    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+    Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.animateContentSize()) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
