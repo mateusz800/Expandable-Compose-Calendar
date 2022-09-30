@@ -32,7 +32,7 @@ internal class LocalDateExtensionTest{
     fun `get date for the first day of the week (default monday)`() {
         val date = LocalDate.of(2022, 9, 21)
         Assert.assertEquals(date.dayOfWeek, DayOfWeek.WEDNESDAY)
-        val startWeekDate = LocalDate.now().getWeekStartDate()
+        val startWeekDate = date.getWeekStartDate()
         Assert.assertEquals(startWeekDate.dayOfWeek, DayOfWeek.MONDAY)
         Assert.assertEquals(startWeekDate.dayOfMonth, 19)
         Assert.assertEquals(startWeekDate.monthValue, 9)
@@ -43,7 +43,7 @@ internal class LocalDateExtensionTest{
     fun `get date for the first day of the week which is sunday`() {
         val date = LocalDate.of(2022, 9, 21)
         Assert.assertEquals(date.dayOfWeek, DayOfWeek.WEDNESDAY)
-        val startWeekDate = LocalDate.now().getWeekStartDate(DayOfWeek.SUNDAY)
+        val startWeekDate = date.getWeekStartDate(DayOfWeek.SUNDAY)
         Assert.assertEquals(startWeekDate.dayOfWeek, DayOfWeek.SUNDAY)
         Assert.assertEquals(startWeekDate.dayOfMonth, 18)
         Assert.assertEquals(startWeekDate.monthValue, 9)
