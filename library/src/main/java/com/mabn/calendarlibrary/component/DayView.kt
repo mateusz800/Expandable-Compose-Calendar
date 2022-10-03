@@ -2,10 +2,7 @@ package com.mabn.calendarlibrary.component
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material.MaterialTheme
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -13,8 +10,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.mabn.calendarlibrary.core.CalendarTheme
 import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.format.TextStyle
@@ -29,15 +28,22 @@ import java.time.format.TextStyle
 fun DayView(
     date: LocalDate,
     onDayClick: (LocalDate) -> Unit,
+    theme: CalendarTheme,
     modifier: Modifier = Modifier,
     isSelected: Boolean = false,
     weekDayLabel: Boolean = true
 ) {
     val isCurrentDay = date == LocalDate.now()
     val dayValueModifier =
-        if (isCurrentDay) modifier.background(MaterialTheme.colors.primary)
-        else if (isSelected) modifier.background(MaterialTheme.colors.primaryVariant)
-        else modifier
+        if (isCurrentDay) modifier.background(
+            theme.selectedDayBackgroundColor.copy(alpha = 0.5f),
+            shape = theme.dayShape
+        )
+        else if (isSelected) modifier.background(
+            theme.selectedDayBackgroundColor,
+            shape = theme.dayShape
+        )
+        else modifier.background(theme.dayBackgroundColor, shape = theme.dayShape)
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
@@ -49,17 +55,23 @@ fun DayView(
                     TextStyle.SHORT,
                     LocalContext.current.resources.configuration.locales[0]
                 ),
-                fontSize = 10.sp
+                fontSize = 10.sp,
+                color = theme.weekDaysTextColor
             )
         }
         Box(
             dayValueModifier
                 .padding(10.dp)
-                .clickable { onDayClick(date) }) {
+                .aspectRatio(1f)
+                .clickable { onDayClick(date) },
+            contentAlignment = Alignment.Center
+        ) {
             Text(
                 date.dayOfMonth.toString(),
                 fontWeight = FontWeight.Bold,
-                fontSize = 18.sp
+                fontSize = 18.sp,
+                textAlign = TextAlign.Center,
+                color = if (isSelected || isCurrentDay) theme.selectedDayValueTextColor else theme.dayValueTextColor
             )
         }
     }

@@ -2,6 +2,7 @@ package com.mabn.calendarlibrary.utils
 
 import java.time.DayOfWeek
 import java.time.LocalDate
+import java.time.YearMonth
 
 /**
  * @return list of [@param count] next dates
@@ -55,4 +56,9 @@ internal fun LocalDate.getRemainingDatesInMonth(): List<LocalDate> {
     }
     return dates
 }
+
+/**
+ * @return YearMonth object of given date
+ */
+internal fun LocalDate.yearMonth(): YearMonth = YearMonth.of(this.year, this.month)
 
