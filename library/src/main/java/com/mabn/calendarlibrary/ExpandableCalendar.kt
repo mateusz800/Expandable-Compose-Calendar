@@ -1,6 +1,7 @@
 package com.mabn.calendarlibrary
 
 import androidx.compose.animation.animateContentSize
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -12,11 +13,18 @@ import com.mabn.calendarlibrary.core.CalendarIntent
 import com.mabn.calendarlibrary.core.Period
 import com.mabn.calendarlibrary.utils.getWeekStartDate
 import com.mabn.calendarlibrary.component.InlineCalendar
+import com.mabn.calendarlibrary.component.MonthText
 import com.mabn.calendarlibrary.component.MonthViewCalendar
+import com.mabn.calendarlibrary.component.ToggleExpandCalendarButton
+import com.mabn.calendarlibrary.core.CalendarTheme
+import com.mabn.calendarlibrary.core.calendarDefaultTheme
 import java.time.LocalDate
 
 @Composable
-fun ExpandableCalendar(onDayClick: (LocalDate) -> Unit) {
+fun ExpandableCalendar(
+    onDayClick: (LocalDate) -> Unit,
+    theme: CalendarTheme = calendarDefaultTheme
+) {
     val viewModel: CalendarViewModel = viewModel()
     val loadedDates = viewModel.visibleDates.collectAsState()
     val selectedDate = viewModel.selectedDate.collectAsState()
@@ -26,6 +34,7 @@ fun ExpandableCalendar(onDayClick: (LocalDate) -> Unit) {
         selectedDate = selectedDate.value,
         onIntent = viewModel::onIntent,
         calendarExpanded = calendarExpanded.value,
+        theme = theme,
         onDayClick = onDayClick
     )
 }
@@ -36,6 +45,7 @@ private fun ExpandableCalendar(
     selectedDate: LocalDate,
     onIntent: (CalendarIntent) -> Unit,
     calendarExpanded: Boolean,
+    theme: CalendarTheme,
     onDayClick: (LocalDate) -> Unit
 ) {
     val currentMonth = if (!calendarExpanded) YearMonth.of(
@@ -46,24 +56,33 @@ private fun ExpandableCalendar(
         loadedDates[1][loadedDates[1].size / 2].month
     )
 
-    Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.animateContentSize()) {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier
+            .animateContentSize()
+            .background(theme.backgroundColor)
+    ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
                 .padding(bottom = 10.dp)
                 .fillMaxWidth()
+                .background(theme.headerBackgroundColor)
         ) {
             Spacer(Modifier.weight(1f))
-            MonthText(selectedMonth = currentMonth)
+            MonthText(selectedMonth = currentMonth, theme = theme)
             Spacer(Modifier.weight(1f))
             ToggleExpandCalendarButton(isExpanded = calendarExpanded,
                 expand = { onIntent(CalendarIntent.ExpandCalendar) },
-                collapse = { onIntent(CalendarIntent.CollapseCalendar) })
+                collapse = { onIntent(CalendarIntent.CollapseCalendar) },
+                color = theme.headerTextColor
+            )
         }
         if (calendarExpanded) {
             MonthViewCalendar(
                 loadedDates,
                 selectedDate,
+                theme = theme,
                 currentMonth = currentMonth,
                 loadDatesForMonth = { yearMonth ->
                     onIntent(
@@ -83,6 +102,7 @@ private fun ExpandableCalendar(
             InlineCalendar(
                 loadedDates,
                 selectedDate,
+                theme = theme,
                 loadNextWeek = { nextWeekDate -> onIntent(CalendarIntent.LoadNextDates(nextWeekDate)) },
                 loadPrevWeek = { endWeekDate ->
                     onIntent(
