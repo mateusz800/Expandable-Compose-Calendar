@@ -6,7 +6,9 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
@@ -42,7 +44,8 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun Calendar() {
     val currentDate = remember { mutableStateOf(LocalDate.now()) }
-    Column() {
+    val scrollState = rememberScrollState()
+    Column(Modifier.verticalScroll(scrollState)) {
         ExpandableCalendar(
             theme = calendarDefaultTheme.copy(
                 dayShape = CircleShape,
@@ -60,6 +63,7 @@ fun Calendar() {
         }
     }
 }
+
 
 @Preview(showBackground = true)
 @Composable

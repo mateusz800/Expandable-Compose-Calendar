@@ -46,7 +46,10 @@ fun DayView(
         else modifier.background(theme.dayBackgroundColor, shape = theme.dayShape)
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center,
         modifier = Modifier
+            .heightIn(max = if (weekDayLabel) 50.dp + 20.dp else 50.dp)
+            .widthIn(max = 50.dp)
             .testTag("day_view_column")
     ) {
         if (weekDayLabel) {
@@ -61,7 +64,7 @@ fun DayView(
         }
         Box(
             dayValueModifier
-                .padding(10.dp)
+                .padding(5.dp)
                 .aspectRatio(1f)
                 .clickable { onDayClick(date) },
             contentAlignment = Alignment.Center
