@@ -18,6 +18,7 @@ import com.mabn.calendarlibrary.component.MonthViewCalendar
 import com.mabn.calendarlibrary.component.ToggleExpandCalendarButton
 import com.mabn.calendarlibrary.core.CalendarTheme
 import com.mabn.calendarlibrary.core.calendarDefaultTheme
+import com.mabn.calendarlibrary.utils.yearMonth
 import java.time.LocalDate
 
 @Composable
@@ -29,9 +30,11 @@ fun ExpandableCalendar(
     val loadedDates = viewModel.visibleDates.collectAsState()
     val selectedDate = viewModel.selectedDate.collectAsState()
     val calendarExpanded = viewModel.calendarExpanded.collectAsState()
+    val currentMonth = viewModel.currentMonth.collectAsState()
     ExpandableCalendar(
         loadedDates = loadedDates.value,
         selectedDate = selectedDate.value,
+        currentMonth = currentMonth.value,
         onIntent = viewModel::onIntent,
         calendarExpanded = calendarExpanded.value,
         theme = theme,
@@ -43,19 +46,12 @@ fun ExpandableCalendar(
 private fun ExpandableCalendar(
     loadedDates: Array<List<LocalDate>>,
     selectedDate: LocalDate,
+    currentMonth: YearMonth,
     onIntent: (CalendarIntent) -> Unit,
     calendarExpanded: Boolean,
     theme: CalendarTheme,
     onDayClick: (LocalDate) -> Unit
 ) {
-    val currentMonth = if (!calendarExpanded) YearMonth.of(
-        loadedDates[1][0].year,
-        loadedDates[1][0].month
-    ) else YearMonth.of(
-        loadedDates[1][loadedDates[1].size / 2].year,
-        loadedDates[1][loadedDates[1].size / 2].month
-    )
-
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
@@ -72,7 +68,8 @@ private fun ExpandableCalendar(
             Spacer(Modifier.weight(1f))
             MonthText(selectedMonth = currentMonth, theme = theme)
             Spacer(Modifier.weight(1f))
-            ToggleExpandCalendarButton(isExpanded = calendarExpanded,
+            ToggleExpandCalendarButton(
+                isExpanded = calendarExpanded,
                 expand = { onIntent(CalendarIntent.ExpandCalendar) },
                 collapse = { onIntent(CalendarIntent.CollapseCalendar) },
                 color = theme.headerTextColor

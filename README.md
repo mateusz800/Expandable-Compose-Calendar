@@ -19,7 +19,7 @@ A calendar with a week view that can be expanded to a month view
 ```gradle
 dependencies {
   ...
-  implementation 'com.github.mateusz800:Expandable-Compose-Calendar:ce5075e1d4'
+  implementation 'com.github.mateusz800:Expandable-Compose-Calendar:<latest version>'
   ...
 }
 ```
