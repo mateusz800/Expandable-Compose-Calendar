@@ -4,6 +4,7 @@
 
 Integrate calendar with your Jetpack Compose project.
 
+[![API](https://img.shields.io/badge/API-21%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=21)
 [![Java CI with Gradle](https://github.com/mateusz800/Expandable-Compose-Calendar/actions/workflows/gradle.yml/badge.svg)](https://github.com/mateusz800/Expandable-Compose-Calendar/actions/workflows/gradle.yml)
 [![](https://jitpack.io/v/mateusz800/Expandable-Compose-Calendar.svg)](https://jitpack.io/#mateusz800/Expandable-Compose-Calendar)
 
@@ -43,7 +44,7 @@ ExpandableCalendar(theme = calendarDefaultTheme.copy(
     // properties that you want to override
 ), onDayClick = {...})
 ```
- `CalendarTheme` data class looks like
+`CalendarTheme` data class looks like
 ```kotlin
 data class CalendarTheme(
     val backgroundColor: Color,
