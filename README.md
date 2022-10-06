@@ -65,5 +65,6 @@ data class CalendarTheme(
 Contributions are always welcome!
 
 #### Show your support
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/G2G0FIGO1)
 
 Give a ⭐️ if this project helped you!
