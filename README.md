@@ -4,8 +4,13 @@
 
 Integrate calendar with your Jetpack Compose project.
 
+
+[![Expandable-Compose-Calendar](https://img.shields.io/badge/Android%20Weekly-%23539-Pink)](https://androidweekly.net/issues/issue-539)
+
+
 [![Java CI with Gradle](https://github.com/mateusz800/Expandable-Compose-Calendar/actions/workflows/gradle.yml/badge.svg)](https://github.com/mateusz800/Expandable-Compose-Calendar/actions/workflows/gradle.yml)
 [![](https://jitpack.io/v/mateusz800/Expandable-Compose-Calendar.svg)](https://jitpack.io/#mateusz800/Expandable-Compose-Calendar)
+
 
 ### Introduction
 
