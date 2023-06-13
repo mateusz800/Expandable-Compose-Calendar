@@ -1,18 +1,14 @@
-package com.mabn.calendarlibrary.component
+package com.example.foodlog.ui.components.calenderview.component
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.itemsIndexed
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
-import com.google.accompanist.flowlayout.FlowColumn
+import com.example.foodlog.ui.components.calenderview.core.CalendarTheme
+import com.example.foodlog.utils.dayViewModifier
 import com.google.accompanist.flowlayout.FlowRow
-import com.mabn.calendarlibrary.core.CalendarTheme
-import com.mabn.calendarlibrary.utils.dayViewModifier
 import java.time.LocalDate
 import java.time.YearMonth
 

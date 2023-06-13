@@ -1,4 +1,4 @@
-package com.mabn.calendarlibrary.core
+package com.example.foodlog.ui.components.calenderview.core
 
 import java.time.LocalDate
 

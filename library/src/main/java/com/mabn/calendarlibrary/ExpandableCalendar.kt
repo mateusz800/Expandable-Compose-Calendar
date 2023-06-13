@@ -1,26 +1,28 @@
-package com.mabn.calendarlibrary
+package com.example.foodlog.ui.components.calenderview
+
 
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.Divider
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import java.time.YearMonth
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.mabn.calendarlibrary.core.CalendarIntent
-import com.mabn.calendarlibrary.core.Period
-import com.mabn.calendarlibrary.utils.getWeekStartDate
-import com.mabn.calendarlibrary.component.InlineCalendar
-import com.mabn.calendarlibrary.component.MonthText
-import com.mabn.calendarlibrary.component.MonthViewCalendar
-import com.mabn.calendarlibrary.component.ToggleExpandCalendarButton
-import com.mabn.calendarlibrary.core.CalendarTheme
-import com.mabn.calendarlibrary.core.calendarDefaultTheme
-import com.mabn.calendarlibrary.utils.yearMonth
+import com.example.foodlog.ui.components.calenderview.component.InlineCalendar
+import com.example.foodlog.ui.components.calenderview.component.MonthText
+import com.example.foodlog.ui.components.calenderview.component.MonthViewCalendar
+import com.example.foodlog.ui.components.calenderview.component.ToggleExpandCalendarButton
+import com.example.foodlog.ui.components.calenderview.core.CalendarIntent
+import com.example.foodlog.ui.components.calenderview.core.CalendarTheme
+import com.example.foodlog.ui.components.calenderview.core.Period
+import com.example.foodlog.ui.components.calenderview.core.calendarDefaultTheme
+import com.example.foodlog.utils.getWeekStartDate
 import java.time.LocalDate
 
 @Composable
@@ -60,23 +62,6 @@ private fun ExpandableCalendar(
             .animateContentSize()
             .background(theme.backgroundColor)
     ) {
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier
-                .padding(bottom = 10.dp)
-                .fillMaxWidth()
-                .background(theme.headerBackgroundColor)
-        ) {
-            Spacer(Modifier.weight(1f))
-            MonthText(selectedMonth = currentMonth, theme = theme)
-            Spacer(Modifier.weight(1f))
-            ToggleExpandCalendarButton(
-                isExpanded = calendarExpanded,
-                expand = { onIntent(CalendarIntent.ExpandCalendar) },
-                collapse = { onIntent(CalendarIntent.CollapseCalendar) },
-                color = theme.headerTextColor
-            )
-        }
         if (calendarExpanded) {
             MonthViewCalendar(
                 loadedDates,
@@ -115,14 +100,12 @@ private fun ExpandableCalendar(
                     onDayClick(it)
                 }
             )
+            Divider(
+                color = Color.LightGray,
+                modifier = Modifier
+                    .fillMaxWidth()  //fill the max height
+                    .height(1.dp),
+            )
         }
     }
 }
-
-
-
-
-
-
-
-

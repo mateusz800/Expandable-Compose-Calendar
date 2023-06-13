@@ -1,4 +1,4 @@
-package com.mabn.calendarlibrary.component
+package com.example.foodlog.ui.components.calenderview.component
 
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -6,7 +6,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
-import com.mabn.calendarlibrary.core.CalendarTheme
+import com.example.foodlog.ui.components.calenderview.core.CalendarTheme
 import java.time.YearMonth
 import java.time.format.TextStyle
 

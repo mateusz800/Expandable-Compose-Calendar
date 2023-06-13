@@ -1,14 +1,15 @@
-package com.mabn.calendarlibrary
+package com.example.foodlog.ui.components.calenderview
 
+import android.widget.Toast
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.mabn.calendarlibrary.core.CalendarIntent
-import com.mabn.calendarlibrary.core.Period
-import com.mabn.calendarlibrary.utils.*
-import com.mabn.calendarlibrary.utils.getMonthStartDate
-import com.mabn.calendarlibrary.utils.getNextDates
-import com.mabn.calendarlibrary.utils.getRemainingDatesInWeek
-import com.mabn.calendarlibrary.utils.getWeekStartDate
+import com.example.foodlog.ui.components.calenderview.core.CalendarIntent
+import com.example.foodlog.ui.components.calenderview.core.Period
+import com.example.foodlog.utils.*
+import com.example.foodlog.utils.getNextDates
+import com.example.foodlog.utils.getRemainingDatesInMonth
+import com.example.foodlog.utils.getWeekStartDate
+import com.example.foodlog.utils.yearMonth
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -77,13 +78,13 @@ class CalendarViewModel : ViewModel() {
         startDate: LocalDate,
         period: Period = Period.WEEK
     ) {
-        viewModelScope.launch(Dispatchers.IO) {
-            _visibleDates.emit(
-                when (period) {
-                    Period.WEEK -> calculateCollapsedCalendarDays(startDate)
-                    Period.MONTH -> calculateExpandedCalendarDays(startDate)
-                }
-            )
+            viewModelScope.launch(Dispatchers.IO) {
+                _visibleDates.emit(
+                    when (period) {
+                        Period.WEEK -> calculateCollapsedCalendarDays(startDate)
+                        Period.MONTH -> calculateExpandedCalendarDays(startDate)
+                    }
+                )
         }
     }
 
