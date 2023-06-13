@@ -1,15 +1,14 @@
-package com.example.foodlog.ui.components.calenderview
+package com.mabn.calendarlibrary
 
-import android.widget.Toast
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.foodlog.ui.components.calenderview.core.CalendarIntent
-import com.example.foodlog.ui.components.calenderview.core.Period
-import com.example.foodlog.utils.*
-import com.example.foodlog.utils.getNextDates
-import com.example.foodlog.utils.getRemainingDatesInMonth
-import com.example.foodlog.utils.getWeekStartDate
-import com.example.foodlog.utils.yearMonth
+import com.mabn.calendarlibrary.core.CalendarIntent
+import com.mabn.calendarlibrary.core.Period
+import com.mabn.calendarlibrary.utils.*
+import com.mabn.calendarlibrary.utils.getNextDates
+import com.mabn.calendarlibrary.utils.getRemainingDatesInMonth
+import com.mabn.calendarlibrary.utils.getWeekStartDate
+import com.mabn.calendarlibrary.utils.yearMonth
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch

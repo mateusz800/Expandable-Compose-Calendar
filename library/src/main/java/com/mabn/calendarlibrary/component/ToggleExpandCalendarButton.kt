@@ -1,4 +1,4 @@
-package com.example.foodlog.ui.components.calenderview.component
+package com.mabn.calendarlibrary.component
 
 import androidx.compose.material.Icon
 import androidx.compose.material.IconToggleButton

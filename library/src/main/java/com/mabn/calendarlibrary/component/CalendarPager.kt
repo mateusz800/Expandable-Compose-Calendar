@@ -1,4 +1,4 @@
-package com.example.foodlog.ui.components.calenderview.component
+package com.mabn.calendarlibrary.component
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
