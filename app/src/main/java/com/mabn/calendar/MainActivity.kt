@@ -20,7 +20,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import com.mabn.calendarlibrary.ExpandableCalendar
-import com.mabn.calendar.ui.theme.CalendarTheme
+import com.mabn.calendarlibrary.theme.CalendarTheme
 import com.mabn.calendarlibrary.core.calendarDefaultTheme
 import java.time.LocalDate
 

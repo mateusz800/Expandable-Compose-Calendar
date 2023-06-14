@@ -1,9 +1,6 @@
 package com.mabn.calendarlibrary.component
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -22,19 +19,18 @@ internal fun InlineCalendar(
     loadPrevWeek: (endWeekDate: LocalDate) -> Unit,
     onDayClick: (LocalDate) -> Unit
 ) {
-    val itemWidth = LocalConfiguration.current.screenWidthDp / 7
+    val itemWidth = LocalConfiguration.current.screenWidthDp / 8
     CalendarPager(
         loadedDates = loadedDates,
         loadNextDates = loadNextWeek,
         loadPrevDates = loadPrevWeek
     ) { currentPage ->
-        Row {
+        Row() {
             loadedDates[currentPage]
                 .forEach { date ->
                     Box(
                         modifier = Modifier
-                            .width(itemWidth.dp)
-                            .padding(5.dp),
+                            .width(itemWidth.dp),
                         contentAlignment = Alignment.Center
                     ) {
                         DayView(

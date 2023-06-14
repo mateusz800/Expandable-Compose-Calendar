@@ -5,10 +5,10 @@ import androidx.lifecycle.viewModelScope
 import com.mabn.calendarlibrary.core.CalendarIntent
 import com.mabn.calendarlibrary.core.Period
 import com.mabn.calendarlibrary.utils.*
-import com.mabn.calendarlibrary.utils.getMonthStartDate
 import com.mabn.calendarlibrary.utils.getNextDates
-import com.mabn.calendarlibrary.utils.getRemainingDatesInWeek
+import com.mabn.calendarlibrary.utils.getRemainingDatesInMonth
 import com.mabn.calendarlibrary.utils.getWeekStartDate
+import com.mabn.calendarlibrary.utils.yearMonth
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -77,13 +77,13 @@ class CalendarViewModel : ViewModel() {
         startDate: LocalDate,
         period: Period = Period.WEEK
     ) {
-        viewModelScope.launch(Dispatchers.IO) {
-            _visibleDates.emit(
-                when (period) {
-                    Period.WEEK -> calculateCollapsedCalendarDays(startDate)
-                    Period.MONTH -> calculateExpandedCalendarDays(startDate)
-                }
-            )
+            viewModelScope.launch(Dispatchers.IO) {
+                _visibleDates.emit(
+                    when (period) {
+                        Period.WEEK -> calculateCollapsedCalendarDays(startDate)
+                        Period.MONTH -> calculateExpandedCalendarDays(startDate)
+                    }
+                )
         }
     }
 

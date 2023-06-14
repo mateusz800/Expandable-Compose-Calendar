@@ -1,8 +1,11 @@
 package com.mabn.calendarlibrary.component
 
-import androidx.compose.foundation.background
+import android.annotation.SuppressLint
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Card
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -14,6 +17,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.mabn.calendarlibrary.core.CalendarTheme
+import com.mabn.calendarlibrary.theme.MontserratFont
+import com.mabn.calendarlibrary.theme.appGradientStart
+import com.mabn.calendarlibrary.theme.textColor
 import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.format.TextStyle
@@ -24,6 +30,7 @@ import java.time.format.TextStyle
  * @param weekDayLabel flag that indicates if name of week day should be visible above day value
  * @param modifier view modifier
  */
+@SuppressLint("SuspiciousIndentation")
 @Composable
 fun DayView(
     date: LocalDate,
@@ -34,7 +41,7 @@ fun DayView(
     weekDayLabel: Boolean = true
 ) {
     val isCurrentDay = date == LocalDate.now()
-    val dayValueModifier =
+    /*val dayValueModifier =
         if (isCurrentDay) modifier.background(
             theme.selectedDayBackgroundColor.copy(alpha = 0.5f),
             shape = theme.dayShape
@@ -43,8 +50,9 @@ fun DayView(
             theme.selectedDayBackgroundColor,
             shape = theme.dayShape
         )
-        else modifier.background(theme.dayBackgroundColor, shape = theme.dayShape)
-    Column(
+        else modifier.background(theme.dayBackgroundColor, shape = theme.dayShape)        )*/
+
+        Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
         modifier = Modifier
@@ -52,30 +60,52 @@ fun DayView(
             .widthIn(max = 50.dp)
             .testTag("day_view_column")
     ) {
-        if (weekDayLabel) {
-            Text(
-                DayOfWeek.values()[date.dayOfWeek.value - 1].getDisplayName(
-                    TextStyle.SHORT,
-                    LocalContext.current.resources.configuration.locales[0]
-                ),
-                fontSize = 10.sp,
-                color = theme.weekDaysTextColor
-            )
-        }
+
         Box(
-            dayValueModifier
-                .padding(5.dp)
-                .aspectRatio(1f)
+            modifier
                 .clickable { onDayClick(date) },
             contentAlignment = Alignment.Center
         ) {
-            Text(
-                date.dayOfMonth.toString(),
-                fontWeight = FontWeight.Bold,
-                fontSize = 18.sp,
-                textAlign = TextAlign.Center,
-                color = if (isSelected || isCurrentDay) theme.selectedDayValueTextColor else theme.dayValueTextColor
-            )
+
+            Column {
+
+                Text(
+                    date.dayOfMonth.toString(),
+                    fontWeight = FontWeight.Bold,
+                    fontFamily = MontserratFont ,
+                    fontSize = 14.sp,
+                    textAlign = TextAlign.Center,
+                    color = if (isSelected || isCurrentDay) theme.selectedDayValueTextColor else MaterialTheme.colors.textColor
+                )
+
+                if (weekDayLabel) {
+                    Text(
+                        DayOfWeek.values()[date.dayOfWeek.value - 1].getDisplayName(
+                            TextStyle.SHORT,
+                            LocalContext.current.resources.configuration.locales[0]
+                        ),
+                        fontSize = 10.sp,
+                        fontFamily = MontserratFont ,
+                        color =   if (isSelected || isCurrentDay) theme.selectedDayValueTextColor else MaterialTheme.colors.textColor,
+                        modifier = Modifier.padding(top = 3.dp, bottom = 3.dp)
+                    )
+                }
+
+            }
         }
+
+        Card(
+            backgroundColor = appGradientStart,
+            modifier = Modifier
+                .padding(top = 2.dp)
+                .fillMaxWidth()  //fill the max height
+                .height(if (isSelected || isCurrentDay) 5.dp else 0.dp),
+            shape = RoundedCornerShape(
+                topStart = 16.dp,
+                topEnd = 16.dp,
+                bottomEnd = 2.dp,
+                bottomStart = 2.dp,
+            )
+        ){}
     }
 }

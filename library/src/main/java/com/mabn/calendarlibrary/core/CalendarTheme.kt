@@ -16,6 +16,7 @@ data class CalendarTheme(
     val selectedDayValueTextColor: Color,
     val headerTextColor: Color,
     val weekDaysTextColor: Color,
+    val selectedWeekDaysTextColor: Color,
     val dayShape: Shape
 )
 
@@ -31,6 +32,7 @@ val calendarDefaultTheme: CalendarTheme
         selectedDayValueTextColor = MaterialTheme.colors.onBackground,
         headerTextColor = MaterialTheme.colors.onBackground,
         weekDaysTextColor = MaterialTheme.colors.onBackground,
+        selectedWeekDaysTextColor = MaterialTheme.colors.primary,
         dayShape = RectangleShape
 
     )
