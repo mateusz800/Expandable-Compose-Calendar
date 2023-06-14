@@ -1,5 +1,6 @@
 package com.mabn.calendarlibrary.component
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -29,6 +30,7 @@ import java.time.format.TextStyle
  * @param weekDayLabel flag that indicates if name of week day should be visible above day value
  * @param modifier view modifier
  */
+@SuppressLint("SuspiciousIndentation")
 @Composable
 fun DayView(
     date: LocalDate,
