@@ -27,13 +27,6 @@ internal fun LocalDate.getWeekStartDate(weekStartDay: DayOfWeek = DayOfWeek.MOND
 }
 
 /**
- * @return first date of the month
- */
-internal fun LocalDate.getMonthStartDate(): LocalDate {
-    return LocalDate.of(this.year, this.month, 1)
-}
-
-/**
  * @return list of dates remaining in the week
  */
 internal fun LocalDate.getRemainingDatesInWeek(weekStartDay: DayOfWeek = DayOfWeek.MONDAY): List<LocalDate> {

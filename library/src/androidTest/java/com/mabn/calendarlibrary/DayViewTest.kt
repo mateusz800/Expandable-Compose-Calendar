@@ -9,6 +9,7 @@ import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.test.*
 import androidx.compose.ui.test.junit4.createComposeRule
 import com.mabn.calendarlibrary.component.DayView
+import com.mabn.calendarlibrary.core.calendarDefaultTheme
 import com.mabn.calendarlibrary.utils.getBackgroundColor
 import org.junit.*
 import org.junit.runners.MethodSorters
@@ -26,8 +27,8 @@ internal class DayViewTest {
         composeTestRule.setContent {
             Surface(Modifier.background(Color.White)){
                 Row {
-                    DayView(todayDate, onDayClick = {})
-                    DayView(tomorrowDate, onDayClick = {})
+                    DayView(todayDate, onDayClick = {}, theme = calendarDefaultTheme)
+                    DayView(tomorrowDate, onDayClick = {}, theme = calendarDefaultTheme)
                 }
             }
         }

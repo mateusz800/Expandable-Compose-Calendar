@@ -5,7 +5,6 @@ import androidx.lifecycle.viewModelScope
 import com.mabn.calendarlibrary.core.CalendarIntent
 import com.mabn.calendarlibrary.core.Period
 import com.mabn.calendarlibrary.utils.*
-import com.mabn.calendarlibrary.utils.getMonthStartDate
 import com.mabn.calendarlibrary.utils.getNextDates
 import com.mabn.calendarlibrary.utils.getRemainingDatesInWeek
 import com.mabn.calendarlibrary.utils.getWeekStartDate
