@@ -8,6 +8,7 @@ import androidx.compose.ui.Alignment
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState
+import com.mabn.calendarlibrary.core.RelativePosition
 import java.time.LocalDate
 
 @OptIn(ExperimentalPagerApi::class)
@@ -19,22 +20,22 @@ internal fun CalendarPager(
     content: @Composable (currentPage: Int) -> Unit
 ) {
     val initialized = remember { mutableStateOf(false) }
-    val pagerState = rememberPagerState(initialPage = 1)
+    val pagerState = rememberPagerState(initialPage = RelativePosition.CURRENT.ordinal)
     LaunchedEffect(pagerState.currentPage) {
-        if (pagerState.currentPage == 2) {
-            loadNextDates(loadedDates[1][0])
-            pagerState.scrollToPage(1)
+        if (pagerState.currentPage == RelativePosition.NEXT.ordinal) {
+            loadNextDates(loadedDates[RelativePosition.CURRENT.ordinal].first())
+            pagerState.scrollToPage(RelativePosition.CURRENT.ordinal)
         }
-        if (pagerState.currentPage == 0 && initialized.value) {
-            loadPrevDates(loadedDates[0][0])
-            pagerState.scrollToPage(1)
+        if (pagerState.currentPage == RelativePosition.PREVIOUS.ordinal && initialized.value) {
+            loadPrevDates(loadedDates[RelativePosition.PREVIOUS.ordinal].first())
+            pagerState.scrollToPage(RelativePosition.CURRENT.ordinal)
         }
     }
     LaunchedEffect(Unit) {
         initialized.value = true
     }
     HorizontalPager(
-        count = 3,
+        count = RelativePosition.values().size,
         state = pagerState,
         verticalAlignment = Alignment.Top
     ) { currentPage ->

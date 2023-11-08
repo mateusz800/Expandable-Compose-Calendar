@@ -3,7 +3,9 @@ package com.mabn.calendarlibrary
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mabn.calendarlibrary.core.CalendarIntent
+import com.mabn.calendarlibrary.core.DateTimeConstants
 import com.mabn.calendarlibrary.core.Period
+import com.mabn.calendarlibrary.core.RelativePosition
 import com.mabn.calendarlibrary.utils.*
 import com.mabn.calendarlibrary.utils.getNextDates
 import com.mabn.calendarlibrary.utils.getRemainingDatesInWeek
@@ -15,6 +17,7 @@ import java.time.LocalDate
 import java.time.YearMonth
 
 class CalendarViewModel : ViewModel() {
+
     private val _visibleDates =
         MutableStateFlow(
             calculateCollapsedCalendarDays(
@@ -29,12 +32,16 @@ class CalendarViewModel : ViewModel() {
     val currentMonth: StateFlow<YearMonth>
         get() = calendarExpanded.zip(visibleDates) { isExpanded, dates ->
             if (isExpanded) {
-                dates[1][dates[1].size / 2].yearMonth()
+                dates[RelativePosition.CURRENT.ordinal][dates[RelativePosition.CURRENT.ordinal].size / 2].yearMonth()
             } else {
-                if (dates[1].count { it.month == dates[1][0].month } > 3)
-                    dates[1][0].yearMonth()
-                else
-                    dates[1][dates[1].size - 1].yearMonth()
+                if (dates[RelativePosition.CURRENT.ordinal].count { it.month == dates[RelativePosition.CURRENT.ordinal].first().month } > RelativePosition.values().size
+                ) {
+                    dates[RelativePosition.CURRENT.ordinal].first()
+                        .yearMonth()
+                } else {
+                    dates[RelativePosition.CURRENT.ordinal].last()
+                        .yearMonth()
+                }
             }
         }.stateIn(viewModelScope, SharingStarted.Eagerly, LocalDate.now().yearMonth())
 
@@ -47,11 +54,14 @@ class CalendarViewModel : ViewModel() {
         when (intent) {
             CalendarIntent.ExpandCalendar -> {
                 calculateCalendarDates(
-                    startDate = currentMonth.value.minusMonths(1).atDay(1),
+                    startDate = currentMonth.value
+                        .minusMonths(1)
+                        .atDay(1),
                     period = Period.MONTH
                 )
                 _calendarExpanded.value = true
             }
+
             CalendarIntent.CollapseCalendar -> {
                 calculateCalendarDates(
                     startDate = calculateCollapsedCalendarVisibleStartDay()
@@ -61,9 +71,11 @@ class CalendarViewModel : ViewModel() {
                 )
                 _calendarExpanded.value = false
             }
+
             is CalendarIntent.LoadNextDates -> {
                 calculateCalendarDates(intent.startDate, intent.period)
             }
+
             is CalendarIntent.SelectDate -> {
                 viewModelScope.launch {
                     _selectedDate.emit(intent.date)
@@ -87,7 +99,8 @@ class CalendarViewModel : ViewModel() {
     }
 
     private fun calculateCollapsedCalendarVisibleStartDay(): LocalDate {
-        val halfOfMonth = visibleDates.value[1][visibleDates.value[1].size / 2]
+        val halfOfMonth =
+            visibleDates.value[RelativePosition.CURRENT.ordinal][visibleDates.value[RelativePosition.CURRENT.ordinal].size / 2]
         val visibleMonth = YearMonth.of(halfOfMonth.year, halfOfMonth.month)
         return if (selectedDate.value.month == visibleMonth.month && selectedDate.value.year == visibleMonth.year)
             selectedDate.value
@@ -95,14 +108,14 @@ class CalendarViewModel : ViewModel() {
     }
 
     private fun calculateCollapsedCalendarDays(startDate: LocalDate): Array<List<LocalDate>> {
-        val dates = startDate.getNextDates(21)
-        return Array(3) {
-            dates.slice(it * 7 until (it + 1) * 7)
+        val dates = startDate.getNextDates(RelativePosition.values().size * DateTimeConstants.DAYS_IN_WEEK)
+        return Array(RelativePosition.values().size) {
+            dates.slice(it * DateTimeConstants.DAYS_IN_WEEK until (it + 1) * DateTimeConstants.DAYS_IN_WEEK)
         }
     }
 
     private fun calculateExpandedCalendarDays(startDate: LocalDate): Array<List<LocalDate>> {
-        val array = Array(3) { monthIndex ->
+        val array = Array(RelativePosition.values().size) { monthIndex ->
             val monthFirstDate = startDate.plusMonths(monthIndex.toLong())
             val monthLastDate = monthFirstDate.plusMonths(1).minusDays(1)
             val weekBeginningDate = monthFirstDate.getWeekStartDate()
