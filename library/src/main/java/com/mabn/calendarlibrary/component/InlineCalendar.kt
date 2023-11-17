@@ -10,6 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
 import com.mabn.calendarlibrary.core.CalendarTheme
+import com.mabn.calendarlibrary.core.DateTimeConstants
 import com.mabn.calendarlibrary.utils.dayViewModifier
 import java.time.LocalDate
 
@@ -22,7 +23,7 @@ internal fun InlineCalendar(
     loadPrevWeek: (endWeekDate: LocalDate) -> Unit,
     onDayClick: (LocalDate) -> Unit
 ) {
-    val itemWidth = LocalConfiguration.current.screenWidthDp / 7
+    val itemWidth = LocalConfiguration.current.screenWidthDp / DateTimeConstants.DAYS_IN_WEEK
     CalendarPager(
         loadedDates = loadedDates,
         loadNextDates = loadNextWeek,

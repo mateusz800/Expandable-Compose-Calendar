@@ -2,26 +2,28 @@ package com.mabn.calendarlibrary
 
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
-import androidx.compose.runtime.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import java.time.YearMonth
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.mabn.calendarlibrary.core.CalendarIntent
-import com.mabn.calendarlibrary.core.Period
-import com.mabn.calendarlibrary.utils.getWeekStartDate
 import com.mabn.calendarlibrary.component.InlineCalendar
 import com.mabn.calendarlibrary.component.MonthText
 import com.mabn.calendarlibrary.component.MonthViewCalendar
 import com.mabn.calendarlibrary.component.ToggleExpandCalendarButton
+import com.mabn.calendarlibrary.core.CalendarIntent
 import com.mabn.calendarlibrary.core.CalendarTheme
+import com.mabn.calendarlibrary.core.Period
 import com.mabn.calendarlibrary.core.calendarDefaultTheme
-import com.mabn.calendarlibrary.utils.yearMonth
+import com.mabn.calendarlibrary.utils.getWeekStartDate
 import java.time.LocalDate
+import java.time.YearMonth
 
 @Composable
 fun ExpandableCalendar(

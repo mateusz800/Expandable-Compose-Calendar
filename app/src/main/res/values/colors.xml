@@ -1,7 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
-    <color name="beige">#FFF2F5DE</color>
-    <color name="medium_aquamarine">#FF86E7B8</color>
 </resources>

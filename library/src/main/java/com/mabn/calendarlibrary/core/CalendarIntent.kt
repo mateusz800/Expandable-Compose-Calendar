@@ -11,6 +11,6 @@ sealed class CalendarIntent {
 
     class SelectDate(val date: LocalDate) : CalendarIntent()
 
-    object ExpandCalendar : CalendarIntent()
-    object CollapseCalendar : CalendarIntent()
+    data object ExpandCalendar : CalendarIntent()
+    data object CollapseCalendar : CalendarIntent()
 }

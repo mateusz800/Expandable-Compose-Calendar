@@ -6,13 +6,13 @@ import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
 
-private val DarkColorPalette = darkColors(
+private val _darkColorPalette = darkColors(
     primary = Purple200,
     primaryVariant = Purple700,
     secondary = Teal200
 )
 
-private val LightColorPalette = lightColors(
+private val _lightColorPalette = lightColors(
     primary = MintGreen,
     primaryVariant = TeaGreen,
     secondary = Teal200,
@@ -31,9 +31,9 @@ private val LightColorPalette = lightColors(
 @Composable
 fun CalendarTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {
     val colors = if (darkTheme) {
-        DarkColorPalette
+        _darkColorPalette
     } else {
-        LightColorPalette
+        _lightColorPalette
     }
 
     MaterialTheme(
